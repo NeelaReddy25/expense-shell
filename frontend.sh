@@ -50,6 +50,9 @@ VALIDATE $? "Extracting frontend code"
 cp /home/ec2-user/expense-shell/expense.conf /etc/nginx/default.d/expense.conf &>>$LOGFILE
 VALIDATE $? "Copied expense conf"
 
+cp /home/ec2-user/expense-shell/nginx.conf /etc/nginx/nginx.conf &>>$LOGFILE
+VALIDATE $? "Updating nginx conf"
+
 systemctl restart nginx &>>$LOGFILE
 VALIDATE $? "Restarting nginx"
 
