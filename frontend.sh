@@ -21,10 +21,10 @@ VALIDATE(){
 
 if [ $USERID -ne 0 ]
 then
-    echo  "Please run this script with root access"
+    echo  "Please run this script with root access."
     exit 1 # manually exit if error comes.
 else    
-    echo "you are super user"
+    echo "You are super user."
 fi
 
 dnf install nginx -y &>>$LOGFILE
@@ -42,13 +42,13 @@ VALIDATE $? "Removing existing content"
 curl -o /tmp/frontend.zip https://expense-builds.s3.us-east-1.amazonaws.com/expense-frontend-v2.zip &>>$LOGFILE
 VALIDATE $? "Downloading frontend code"
 
-cd /usr/share/nginx/html 
+cd /usr/share/nginx/html &>>$LOGFILE
 unzip /tmp/frontend.zip &>>$LOGFILE
 VALIDATE $? "Extracting frontend code"
 
 #Check your repo and path
 cp /home/ec2-user/expense-shell/expense.conf /etc/nginx/default.d/expense.conf &>>$LOGFILE
-VALIDATE $? "Copied expense path"
+VALIDATE $? "Copied expense conf"
 
 systemctl restart nginx &>>$LOGFILE
 VALIDATE $? "Restarting nginx"
